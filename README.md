@@ -84,6 +84,9 @@ python3 train.py --classes num_classes --batch batch_size --epochs epochs --size
 	}
 
 
+[MobileNetV2](https://github.com/xiaochus/MobileNetV2)
+
+
 ## Copyright
 See [LICENSE](LICENSE) for details.
 
