@@ -28,32 +28,39 @@ Each line describes a sequence of 1 or more identical (modulo stride) layers, re
 
 The recommended size of the image in the paper is 224 * 224. The ```data\convert.py``` file provide a demo of resize cifar-100 dataset to this size.
 
-**The dataset folder structure is as follows:**
+change the image root directory in the train.py
 
-	| - data/
-		| - train/
-	  		| - class 0/
-				| - image.jpg
-					....
-			| - class 1/
-			  ....
-			| - class n/
-		| - validation/
-	  		| - class 0/
-			| - class 1/
-			  ....
-			| - class n/
+you need to prepare train.txt and valid.txt
+the file format is like:
+```
+image,label
+scence#3/occlusion/50%/glasses_04/frame0215.jpg,glasses_04
+scence#1/pixel_color/30/pencil_01/frame0093.jpg,pencil_01
+scence#2/illumination/Normal/ladle_01/frame0214.jpg,ladle_01
+scence#1/Illumination/Strong/scissors_02/frame0191.jpg,scissors_02
+scence#3/clutter/High/toy_05/frame0110.jpg,toy_05
+scence#2/pixel/30-200/ladle_04/frame0214.jpg,ladle_04
+scence#3/pixel/200/toy_03/frame0221.jpg,toy_03
+scence#1/Illumination/Normal/stapler_03/frame0153.jpg,stapler_03
+scence#1/pixel_color/200/pencil_05/frame0101.jpg,pencil_05
+scence#1/pixel_color/30-200/paper_cutter_03/frame0051.jpg,paper_cutter_03
+scence#1/clutter_color/High/stapler_01/frame0173.jpg,stapler_01
+scence#1/clutter_color/High/paper_cutter_01/frame0089.jpg,paper_cutter_01
+scence#3/occlusion/50%/glasses_04/frame0248.jpg,glasses_04
+scence#2/pixel/30-200/cup_01/frame0096.jpg,cup_01
+scence#2/pixel/200/cup_01/frame0051.jpg,cup_01
+```
 
 **Run command below to train the model:**
 
 ```
-python train.py --classes num_classes --batch batch_size --epochs epochs --size image_size
+python3 train.py --classes num_classes --batch batch_size --epochs epochs --size image_size  --train train.txt --valid valid.txt
 ```
 
 The ```.h5``` weight file was saved at model folder. If you want to do fine tune the trained model, you can run the following command. However, it should be noted that the size of the input image should be consistent with the original model.
 
 ```
-python train.py --classes num_classes --batch batch_size --epochs epochs --size image_size --weights weights_path --tclasses pre_classes
+python3 train.py --classes num_classes --batch batch_size --epochs epochs --size image_size --weights weights_path --tclasses pre_classes  --train train.txt --valid valid.txt
 ```
 
 **Parameter explanation**

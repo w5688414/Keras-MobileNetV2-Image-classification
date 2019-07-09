@@ -199,26 +199,26 @@ def train(batch, epochs, num_classes, size, weights, tclasses,train_path,valid_p
         validation_steps=count2 // batch,
         epochs=epochs,
         callbacks=[earlystop])
-    rootDir='/home/eric/data/scene'
-    for i in range(10):      
-        test_path='group'+str(i)+'_test.txt'
-        testfilepath=os.path.join(rootDir,test_path)
-        testDf=pd.read_csv(testfilepath,header=None) #加载papa.txt,指定它的分隔符是 \t
-        testDf.rename(columns={0:"filename",1:'class'},inplace=True)
-        datagen3 = ImageDataGenerator(rescale=1. / 255)
-        validation_generator = datagen3.flow_from_dataframe(
-                                                            dataframe=testDf,
-                                                                directory=rootDir,
-                                                                x_col="filename",
-                                                                y_col="class",
-                                                                subset="training",
-                                                                #   classes=labels,
-                                                                target_size=[size, size],
-                                                                batch_size=batch,
-                                                                class_mode='categorical')
+    # rootDir='/home/eric/data/scene'
+    # for i in range(10):      
+    #     test_path='group'+str(i)+'_test.txt'
+    #     testfilepath=os.path.join(rootDir,test_path)
+    #     testDf=pd.read_csv(testfilepath,header=None) #加载papa.txt,指定它的分隔符是 \t
+    #     testDf.rename(columns={0:"filename",1:'class'},inplace=True)
+    #     datagen3 = ImageDataGenerator(rescale=1. / 255)
+    #     validation_generator = datagen3.flow_from_dataframe(
+    #                                                         dataframe=testDf,
+    #                                                             directory=rootDir,
+    #                                                             x_col="filename",
+    #                                                             y_col="class",
+    #                                                             subset="training",
+    #                                                             #   classes=labels,
+    #                                                             target_size=[size, size],
+    #                                                             batch_size=batch,
+    #                                                             class_mode='categorical')
         
-        result=model.evaluate_generator(validation_generator,steps=testDf.shape[0]//batch)
-        print(result)
+    #     result=model.evaluate_generator(validation_generator,steps=testDf.shape[0]//batch)
+    #     print(result)
 
     if not os.path.exists('model'):
         os.makedirs('model')
